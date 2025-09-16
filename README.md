@@ -5,7 +5,7 @@
 
 ---
 
-## 🚀 Запуск
+## Запуск
 ```bash
 git clone https://github.com/username/todo-assignment.git
 cd todo-assignment
@@ -16,15 +16,220 @@ npm start
 
 Документация Swagger: http://localhost:3000/docs
 
-## 📌 Эндпоинты
-```bash
-POST /tasks — создать задачу
+\## 📌 Эндпоинты
 
-GET /tasks — список задач (?completed=true|false)
+\### POST /auth/register
 
-GET /tasks/:id — получить задачу
+\*\*Request Body (application/json)\*\*
 
-PUT /tasks/:id — обновить
+- `username`: string
+- `password`: string
 
-DELETE /tasks/:id — удалить
-```
+\*\*Responses (application/json)\*\*
+
+- \*\*201 Created\*\*
+
+\```json
+
+{ "message": "User created" }
+
+409 Conflict
+
+json
+
+Копировать код
+
+{ "error": "User already exists" }
+
+POST /auth/login
+
+Request Body (application/json)
+
+username: string
+
+password: string
+
+Responses (application/json)
+
+200 OK
+
+json
+
+Копировать код
+
+{ "message": "Login successful" }
+
+401 Unauthorized
+
+json
+
+Копировать код
+
+{ "error": "Invalid username or password" }
+
+GET /session
+
+Authorization
+
+Session cookie
+
+Responses (application/json)
+
+200 OK
+
+json
+
+Копировать код
+
+{ "id": 1, "username": "demoUser" }
+
+POST /auth/logout
+
+Authorization
+
+Session cookie
+
+Responses (application/json)
+
+200 OK
+
+json
+
+Копировать код
+
+{ "message": "Logout successful" }
+
+POST /tasks
+
+Authorization
+
+Session cookie
+
+Request Body (application/json)
+
+title: string
+
+description: string
+
+completed?: boolean
+
+Responses (application/json)
+
+201 Created
+
+json
+
+Копировать код
+
+{
+
+"id": 1,
+
+"title": "Task title",
+
+"description": "Some description",
+
+"completed": false
+
+}
+
+GET /tasks
+
+Authorization
+
+Session cookie
+
+Query Parameters
+
+completed: boolean
+
+Responses (application/json)
+
+200 OK
+
+json
+
+Копировать код
+
+[
+
+{
+
+"id": 1,
+
+"title": "Task title",
+
+"description": "Some description",
+
+"completed": false
+
+}
+
+]
+
+PUT /tasks/:id
+
+Authorization
+
+Session cookie
+
+Request Body (application/json)
+
+title?: string
+
+description?: string
+
+completed?: boolean
+
+Responses (application/json)
+
+200 OK
+
+json
+
+Копировать код
+
+{
+
+"id": 1,
+
+"title": "Updated title",
+
+"description": "Updated description",
+
+"completed": true
+
+}
+
+404 Not Found
+
+json
+
+Копировать код
+
+{ "error": "Task not found" }
+
+DELETE /tasks/:id
+
+Authorization
+
+Session cookie
+
+Responses (application/json)
+
+200 OK
+
+json
+
+Копировать код
+
+{ "message": "Task deleted" }
+
+404 Not Found
+
+json
+
+Копировать код
+
+{ "error": "Task not found" }
+
