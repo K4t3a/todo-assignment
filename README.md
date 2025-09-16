@@ -15,3 +15,16 @@ npm start
 Сервер: http://localhost:3000
 
 Документация Swagger: http://localhost:3000/docs
+
+##📌 Эндпоинты
+```bash
+POST /tasks — создать задачу
+
+GET /tasks — список задач (?completed=true|false)
+
+GET /tasks/:id — получить задачу
+
+PUT /tasks/:id — обновить
+
+DELETE /tasks/:id — удалить
+```
