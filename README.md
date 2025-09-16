@@ -16,9 +16,9 @@ npm start
 
 Документация Swagger: http://localhost:3000/docs
 
-\## 📌 Эндпоинты
+## 📌 Эндпоинты
 
-\### POST /auth/register
+## POST /auth/register
 
 \*\*Request Body (application/json)\*\*
 
