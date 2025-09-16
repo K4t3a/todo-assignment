@@ -7,8 +7,8 @@
 
 ## 🚀 Запуск
 ```bash
-git clone https://github.com/username/todo-api-assignment.git
-cd todo-api-assignment
+git clone https://github.com/username/todo-assignment.git
+cd todo-assignment
 npm install
 npm start
 ```
