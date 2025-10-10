@@ -20,216 +20,57 @@ npm start
 
 ## POST /auth/register
 
-\*\*Request Body (application/json)\*\*
-
-- `username`: string
-- `password`: string
-
-\*\*Responses (application/json)\*\*
-
-- \*\*201 Created\*\*
-
-\```json
-
-{ "message": "User created" }
-
-409 Conflict
-
-json
-
-Копировать код
-
-{ "error": "User already exists" }
-
-POST /auth/login
-
-Request Body (application/json)
-
-username: string
-
-password: string
-
-Responses (application/json)
-
-200 OK
-
-json
-
-Копировать код
-
-{ "message": "Login successful" }
-
-401 Unauthorized
-
-json
-
-Копировать код
-
-{ "error": "Invalid username or password" }
-
-GET /session
-
-Authorization
-
-Session cookie
-
-Responses (application/json)
-
-200 OK
-
-json
-
-Копировать код
-
-{ "id": 1, "username": "demoUser" }
-
-POST /auth/logout
-
-Authorization
-
-Session cookie
-
-Responses (application/json)
-
-200 OK
-
-json
-
-Копировать код
-
-{ "message": "Logout successful" }
-
-POST /tasks
-
-Authorization
-
-Session cookie
-
-Request Body (application/json)
-
-title: string
-
-description: string
-
-completed?: boolean
-
-Responses (application/json)
-
-201 Created
-
-json
-
-Копировать код
-
-{
-
-"id": 1,
-
-"title": "Task title",
-
-"description": "Some description",
-
-"completed": false
-
-}
-
-GET /tasks
-
-Authorization
-
-Session cookie
-
-Query Parameters
-
-completed: boolean
-
-Responses (application/json)
-
-200 OK
-
-json
-
-Копировать код
-
-[
-
-{
-
-"id": 1,
-
-"title": "Task title",
-
-"description": "Some description",
-
-"completed": false
-
-}
-
-]
-
-PUT /tasks/:id
-
-Authorization
-
-Session cookie
-
-Request Body (application/json)
-
-title?: string
-
-description?: string
-
-completed?: boolean
-
-Responses (application/json)
-
-200 OK
-
-json
-
-Копировать код
-
-{
-
-"id": 1,
-
-"title": "Updated title",
-
-"description": "Updated description",
-
-"completed": true
-
-}
-
-404 Not Found
-
-json
-
-Копировать код
-
-{ "error": "Task not found" }
-
-DELETE /tasks/:id
-
-Authorization
-
-Session cookie
-
-Responses (application/json)
-
-200 OK
-
-json
-
-Копировать код
-
-{ "message": "Task deleted" }
-
-404 Not Found
-
-json
-
-Копировать код
-
+*Request Body:* `{"username": "string", "password": "string"}`  
+*Responses:*  
+`201: {"message": "User created"}`  
+`409: {"error": "User already exists"}`
+
+## POST /auth/login 
+**POST /auth/login**  
+*Request Body:* `{"username": "string", "password": "string"}`  
+*Responses:*  
+`200: {"message": "Login successful"}`  
+`401: {"error": "Invalid username or password"}`
+
+## GET /session 
+**GET /session**  
+*Authorization:* Session cookie  
+*Response:*  
+`200: {"id": 1, "username": "demoUser"}`
+
+## POST /auth/logout
+**POST /auth/logout**  
+*Authorization:* Session cookie  
+*Response:*  
+`200: {"message": "Logout successful"}`
+
+## POST /tasks 
+**POST /tasks**  
+*Authorization:* Session cookie  
+*Request Body:* `{"title": "string", "description": "string", "completed": "boolean"}`  
+*Response:*  
+`201: {"id": 1, "title": "Task title", "description": "Some description", "completed": false}`
+
+ ## GET /tasks 
+**GET /tasks**  
+*Authorization:* Session cookie  
+*Query Parameters:* `completed: boolean`  
+*Response:*  
+`200: [{"id": 1, "title": "Task title", "description": "Some description", "completed": false}]`
+
+## PUT /tasks/:id 
+**PUT /tasks/:id**  
+*Authorization:* Session cookie  
+*Request Body:* `{"title": "string", "description": "string", "completed": "boolean"}`  
+*Responses:*  
+`200: {"id": 1, "title": "Updated title", "description": "Updated description", "completed": true}`  
+`404: {"error": "Task not found"}`
+
+## DELETE /tasks/:id 
+**DELETE /tasks/:id**  
+*Authorization:* Session cookie  
+*Responses:*  
+`200: {"message": "Task deleted"}`  
+`404: {"error": "Task not found"}`
 { "error": "Task not found" }
 
