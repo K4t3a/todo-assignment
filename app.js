@@ -19,15 +19,13 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-// Healthcheck
+
 app.get("/", (req, res) => {
   res.json({ status: "ok", name: "todo-api", version: "1.0.0" });
 });
 
-// Swagger UI
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
 
-// Хелпер валидации
 function handleValidation(req, res, next) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -43,7 +41,6 @@ function handleValidation(req, res, next) {
   next();
 }
 
-/** Создание задачи: POST /tasks */
 app.post(
   "/tasks",
   [
@@ -61,7 +58,6 @@ app.post(
   }
 );
 
-/** Список: GET /tasks?completed=true|false */
 app.get(
   "/tasks",
   [ query("completed").optional().isBoolean().withMessage("completed must be boolean (true/false)") ],
@@ -76,7 +72,6 @@ app.get(
   }
 );
 
-/** Получение одной: GET /tasks/:id */
 app.get(
   "/tasks/:id",
   [ param("id").isInt({ min: 1 }).withMessage("id must be a positive integer") ],
@@ -91,7 +86,6 @@ app.get(
   }
 );
 
-/** Обновление: PUT /tasks/:id (все поля опциональны) */
 app.put(
   "/tasks/:id",
   [
@@ -121,7 +115,6 @@ app.put(
   }
 );
 
-/** Удаление: DELETE /tasks/:id */
 app.delete(
   "/tasks/:id",
   [ param("id").isInt({ min: 1 }).withMessage("id must be a positive integer") ],
@@ -136,12 +129,10 @@ app.delete(
   }
 );
 
-// 404 для неизвестных маршрутов
 app.use((req, res) => {
   res.status(404).json({ error: "NotFound", message: "Route not found" });
 });
 
-// Централизованный обработчик 500
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: "InternalServerError", message: "Something went wrong" });
@@ -150,3 +141,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Todo API listening on http://localhost:${PORT} (docs at /docs)`);
 });
+
